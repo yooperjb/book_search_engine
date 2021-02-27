@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 
 //app.use(routes);
 
+// looks for db to open - upon successfully connection, start the server
 db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`🌍 Now listening on localhost:${PORT}`)
