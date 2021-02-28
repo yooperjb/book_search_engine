@@ -1,15 +1,12 @@
 const express = require('express');
-const path = require('path');
-// connect to MongoDB
-const db = require('./config/connection');
-// import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
-const { authMiddleware } = require('./utils/auth');
-// dont think we need this
-//const routes = require('./routes');
-
+const path = require('path');
 // import typeDefs and resolvers from schemas
 const { typeDefs, resolvers } = require('./schemas');
+// connect to MongoDB
+const db = require('./config/connection');
+
+const { authMiddleware } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -35,8 +32,6 @@ server.applyMiddleware({ app });
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
-
-//app.use(routes);
 
 // looks for db to open - upon successfully connection, start the server
 db.once('open', () => {
