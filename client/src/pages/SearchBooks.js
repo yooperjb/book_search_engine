@@ -62,11 +62,10 @@ const SearchBooks = () => {
   
     // check for user token - get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    //console.log("Token:", token);
+    
     if (!token) {
       return false;
     }
-    //console.log("bookToSave: ", bookToSave);
     
     try {
       

@@ -55,12 +55,14 @@ const resolvers = {
         }, 
 
         saveBook: async (parent, { bookData }, context ) => {
-            //console.log("Book: ", bookData);
+            //console.log("bookData: ", bookData);
+            //console.log("user: ", context.user._id);
             // check for logged-in user
+
             if (context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { savedBooks: { bookData }}},
+                    { $addToSet: { savedBooks: bookData }},
                     {new: true}
                 );
 
@@ -71,7 +73,7 @@ const resolvers = {
         },
 
         removeBook: async (parent, { bookId }, context ) => {
-            console.log("DeleteBook: ", book);
+        
             if (context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
